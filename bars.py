@@ -11,24 +11,14 @@ def get_biggest_bar(data):
     biggest_bar = max(data, key=lambda x: x['Cells']['SeatsCount'])    
     return biggest_bar
 
-
 def get_smallest_bar(data):
     smallest_bar = min(data, key=lambda x: x['Cells']['SeatsCount'])    
     return smallest_bar
 
 def get_nearest_bar(data, latitude, longitude):
-'''
-    bars_distance = [] # Первым элементом каждого вложенного массива будет дистанция, вторым - id.
-    for bar_list_id, bar in enumerate(data): # Перебираем бары по одному.
-        distance_to_current_bar = \
-        math.sqrt((bar['Cells']['geoData']['coordinates'][0] - float(latitude))**2 +
-            (bar['Cells']['geoData']['coordinates'][1] - float(longitude))**2)
-            # Используем теорему Пифагора, принимая, что в пределах Москвы можем считать, что работаем на плоскости, а не на эллипсоиде/геоиде.
-        bars_distance.append([distance_to_current_bar, bar_list_id])
-    return min(bars_distance)[1]'''
-    
-    nearest_bar = min(data, key=lambda x: math.sqrt((x['Cells']['geoData']['coordinates'][0] - float(latitude))**2 +
-            (x['Cells']['geoData']['coordinates'][1] - float(longitude))**2))
+
+    nearest_bar = min(data, key=lambda bar: math.sqrt((bar['Cells']['geoData']['coordinates'][0] - float(latitude))**2 +
+            (bar['Cells']['geoData']['coordinates'][1] - float(longitude))**2))
     return nearest_bar
 
 
