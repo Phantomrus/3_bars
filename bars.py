@@ -3,7 +3,8 @@ import math
 
 
 def load_data(filepath):
-    bars_description = json.loads(open(filepath, 'r').read())
+    with open(filepath, 'r') as file_with_inform:
+        bars_description = json.loads(file_with_inform.read())
     return bars_description
 
 def get_biggest_bar(data):
